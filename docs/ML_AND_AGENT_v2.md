@@ -9,6 +9,8 @@ reference library:
 - **[MLES]** Vyas et al. (eds.) — *Application of Machine Learning in Earth Sciences* (Springer)
 - **[D2L]** Zhang, Lipton, Li & Smola — *Dive into Deep Learning*
 
+![SCOPE 2.0 architecture](proof/architecture_diagram.png)
+
 ---
 
 ## 1. A real, evaluated land-cover classifier
