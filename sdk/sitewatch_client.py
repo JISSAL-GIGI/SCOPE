@@ -89,3 +89,19 @@ class SiteWatch:
             "latitude": lat, "longitude": lon, "buffer_km": buffer_km,
             "band": band, "years_back": years_back,
         })
+
+    def ask(self, question: str, user_id: str = "me") -> Dict:
+        """Ask the grounded AI analyst.
+
+        Runs the plan -> act -> ground -> synthesise loop server-side and
+        returns a structured result:
+
+            {
+              "answer": str,               # plain-language, cites its sources
+              "citations": [str, ...],     # page-level book citations
+              "tools_used": [str, ...],    # live tools the agent invoked
+              "reasoning": [str, ...],     # transparent step trace
+              "grounded": bool             # True if book evidence was used
+            }
+        """
+        return self._post("/v2/agent/ask", {"question": question, "user_id": user_id})

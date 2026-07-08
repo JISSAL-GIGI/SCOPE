@@ -21,6 +21,11 @@ accuracy evidence. SiteWatch AI 2.0 solves all three:
 
 Full methodology (with literature citations): [`docs/WHITEPAPER.md`](docs/WHITEPAPER.md)
 
+**New in 2.0:** a real, cross-validated ML land-cover classifier, a
+book-grounded RAG analyst with page-level citations, and an agentic reasoning
+loop — see [`docs/ML_AND_AGENT_v2.md`](docs/ML_AND_AGENT_v2.md) with verified
+results (overall accuracy 0.882, kappa 0.869).
+
 ## Use it
 
 ```python
@@ -36,6 +41,10 @@ result = sw.analyze_change(
 print(result["change_label"])       # e.g. "construction"
 print(result["confidence"])         # e.g. 0.93
 print(result["sar"])                # radar corroboration evidence
+
+# Ask the grounded AI analyst (cites the science books it used):
+answer = sw.ask("Why was this flagged, and how is the confidence computed?")
+print(answer["answer"], answer["citations"])
 ```
 
 SDK: [`sdk/sitewatch_client.py`](sdk/sitewatch_client.py) (MIT licensed).
