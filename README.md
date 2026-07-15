@@ -21,6 +21,9 @@ accuracy evidence. SiteWatch AI 2.0 solves all three:
 
 Full methodology (with literature citations): [`docs/WHITEPAPER.md`](docs/WHITEPAPER.md)
 
+**New here? Start with the [User Guide](docs/USER_GUIDE.md)** — what to type,
+how to read results, geofencing, and email alerts, with real GUI screenshots.
+
 **New in 2.0:** a real, cross-validated ML land-cover classifier, a
 book-grounded RAG analyst with page-level citations, and an agentic reasoning
 loop — see [`docs/ML_AND_AGENT_v2.md`](docs/ML_AND_AGENT_v2.md) with verified
