@@ -45,6 +45,10 @@ citing the actual SAR log-ratio and NDWI values from your scan.
   SAR radar** section (baseline/current backscatter + ±3 dB change map).
 - **Export Report** — downloads the full structured report.
 
+![All-weather SAR radar section](gui/gui_sar_radar.png)
+
+*The all-weather radar section: Sentinel-1 backscatter before/after and the ±3 dB log-ratio change map — captured from the running app.*
+
 **Small areas:** if your geofence is under ~0.5 km², the app warns you that
 per-pixel statistics are unreliable and renders imagery with ~3 km of
 surrounding context so the scene stays recognizable.
