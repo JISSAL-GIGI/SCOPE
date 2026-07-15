@@ -26,6 +26,17 @@ book-grounded RAG analyst with page-level citations, and an agentic reasoning
 loop — see [`docs/ML_AND_AGENT_v2.md`](docs/ML_AND_AGENT_v2.md) with verified
 results (overall accuracy 0.882, kappa 0.869).
 
+**New in 2.1 — shipped and verified live:** the table above is no longer a
+promise; it runs in the production scan pipeline. Every scan now performs
+Sentinel-1 SAR corroboration (median composites, ±3 dB log-ratio, radar water
+extent) and seasonal alert triage against the site's own multi-year z-score
+baseline, with SAR-adjusted calibrated confidence. Live run over Kochi, India
+(monsoon conditions): optical change 18.8%, SAR change 16.5% from 6 radar
+images — **radar independently confirmed the optical signal**, confidence
+92.6%. See [`docs/ALL_WEATHER_MONITORING.md`](docs/ALL_WEATHER_MONITORING.md)
+and [`docs/LIVE_VERIFICATION.md`](docs/LIVE_VERIFICATION.md), with real scan
+imagery in [`docs/proof/`](docs/proof/).
+
 ## Use it
 
 ```python
