@@ -21,6 +21,14 @@ accuracy evidence. SiteWatch AI 2.0 solves all three:
 
 Full methodology (with literature citations): [`docs/WHITEPAPER.md`](docs/WHITEPAPER.md)
 
+## The product, live
+
+[![SCOPE results card](docs/gui/gui_results_card.png)](docs/USER_GUIDE.md)
+
+*The actual running app: calibrated confidence, multi-spectral imagery comparison, alert triage.
+Click the image (or read the **[User Guide](docs/USER_GUIDE.md)**) for what to type, how to read
+results, geofencing and email alerts — with more screenshots.*
+
 **New here? Start with the [User Guide](docs/USER_GUIDE.md)** — what to type,
 how to read results, geofencing, and email alerts, with real GUI screenshots.
 
