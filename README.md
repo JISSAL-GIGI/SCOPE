@@ -37,6 +37,25 @@ images — **radar independently confirmed the optical signal**, confidence
 and [`docs/LIVE_VERIFICATION.md`](docs/LIVE_VERIFICATION.md), with real scan
 imagery in [`docs/proof/`](docs/proof/).
 
+### See it — real output from the live system
+
+| Optical: true color (Apr → Jul, monsoon) | Radar: same site, cloud-immune |
+|---|---|
+| ![](docs/proof/kochi_rgb_baseline.png) | ![](docs/proof/kochi_sar_baseline.jpg) |
+| ![](docs/proof/kochi_rgb_current.png) | ![](docs/proof/kochi_sar_current.jpg) |
+
+| NDVI change map | SAR log-ratio change | Water change hotspots |
+|---|---|---|
+| ![](docs/proof/kochi_ndvi_change_map.png) | ![](docs/proof/kochi_sar_change_map.png) | ![](docs/proof/kochi_water_change_map.png) |
+
+**ML classifier validation** (leakage-safe grouped CV):
+
+| Confusion matrix | Classification map | Feature importance |
+|---|---|---|
+| ![](docs/proof/confusion_matrix.png) | ![](docs/proof/classification_map.png) | ![](docs/proof/feature_importance.png) |
+
+![Architecture](docs/proof/architecture_diagram.png)
+
 ## Use it
 
 ```python

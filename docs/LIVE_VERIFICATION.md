@@ -52,3 +52,38 @@ increase, red = decrease), `kochi_sar_water_current.png`.
 Known limitation: the legacy compiled API whitelists response fields, so the
 chat UI shows SAR results in report text (not as a dedicated image grid);
 the full SAR payload is stored in the scan record and available to the v2 API.
+
+
+## Visual evidence gallery
+
+### Sentinel-2 optical (10 m)
+
+| Baseline (2026-04-20, cloud 3.6%) | Current (2026-07-14, cloud 26.8%) |
+|---|---|
+| ![](proof/kochi_rgb_baseline.png) | ![](proof/kochi_rgb_current.png) |
+
+| NIR (vegetation) before | NIR after | SWIR (moisture) before | SWIR after |
+|---|---|---|---|
+| ![](proof/kochi_nir_baseline.png) | ![](proof/kochi_nir_current.png) | ![](proof/kochi_swir_baseline.png) | ![](proof/kochi_swir_current.png) |
+
+### Water analysis (NDWI > 0.2)
+
+| Water mask before | Water mask after | Gain/loss map |
+|---|---|---|
+| ![](proof/kochi_water_mask_baseline.png) | ![](proof/kochi_water_mask_current.png) | ![](proof/kochi_water_change_map.png) |
+
+### Change detection
+
+| NDVI change | Binary change mask |
+|---|---|
+| ![](proof/kochi_ndvi_change_map.png) | ![](proof/kochi_change_detection_mask.png) |
+
+### Sentinel-1 SAR — all-weather radar (v2.1)
+
+| SAR baseline (VV dB) | SAR current | Log-ratio change (±3 dB) | Radar water extent |
+|---|---|---|---|
+| ![](proof/kochi_sar_baseline.jpg) | ![](proof/kochi_sar_current.jpg) | ![](proof/kochi_sar_change_map.png) | ![](proof/kochi_sar_water_current.png) |
+
+Green = backscatter increase, red = decrease. Radar data is unaffected by the
+26.8% cloud cover that degrades the optical current image — this is the
+monsoon observation gap being closed in practice.
