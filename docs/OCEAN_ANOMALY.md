@@ -75,6 +75,47 @@ by the threshold percentile.
 (normal vs anomalous mean spectra), `ocean_training_curve.png`,
 `ocean_error_hist.png` (error distribution + threshold).
 
+## Named, explained events (not just a heatmap)
+
+Raw anomaly pixels are turned into the answer a coastal manager actually wants —
+*what happened, where, and how sure are we*:
+
+- **Classification** by spectral signature into **algal bloom** (green + red-edge
+  up, blue down — elevated chlorophyll-a), **sediment plume** (reflectance rising
+  toward the red), **CDOM / black water** (strong blue suppression), or
+  **turbidity**.
+- **Spatial clustering** of anomalous pixels into discrete events, each with a
+  centroid (lat/lon), area, **severity** (low/medium/high) and a confidence.
+- **Explainability** — per-band reconstruction-error attribution (a Grad-CAM-style
+  readout, cf. Ex 4.4) showing *which OLCI bands* drove each flag. On a validated
+  synthetic scene the model recovers one of each event type correctly
+  (ROC-AUC 0.95), with attribution concentrating on Oa06/Oa08/Oa11 — the
+  chlorophyll bands.
+
+A run reports, e.g., *"3 events detected: 1 algal bloom, 1 sediment plume,
+1 CDOM/black water"* with a map, a per-band attribution chart, and an OC4-style
+**chlorophyll-a** product (mg m⁻³).
+
+## Grounding in ocean geophysics (Ex 1.2 / 1.3)
+
+- **Chlorophyll-a** via the OC4 maximum-band-ratio algorithm
+  `Chl = 10^(a0 + a1·R + … )`, `R = log10(max(Rrs443,490,510)/Rrs560)`.
+- **Climatology anomaly** `anomaly(t) = value(t) − mean_climatology` with a
+  per-pixel z-score, plus **Pearson correlation** — a second, physically-grounded
+  detector that can **corroborate** the autoencoder (the ocean-colour analogue of
+  SiteWatch's SAR corroboration).
+
+## Real Sentinel-3 data
+
+- **Earth Engine** (easiest): `COPERNICUS/S3/OLCI` sampled by lat/lon + date — no
+  downloads, uses the app's existing EE integration.
+- **Copernicus** (most accurate for ocean colour): download OLCI **Level-2 WFR**
+  products from the [Copernicus Data Space](https://dataspace.copernicus.eu/) or
+  [CMEMS](https://marine.copernicus.eu/), or NASA
+  [Ocean Color](https://oceancolor.gsfc.nasa.gov/) L2/L3 — then point `--source
+  copernicus --path` at the `.SEN3` folder or a stacked GeoTIFF (read with
+  Rasterio/Rioxarray).
+
 ## Where it lives (engine — private repo)
 
 `backend/ocean_anomaly/` (loaders, preprocessing, Keras autoencoder, scoring,
