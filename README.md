@@ -2,8 +2,8 @@
 
 **Earth intelligence you can trust.** Satellite change detection and
 environmental monitoring where **every alert carries a statistical confidence
-score** — built on Sentinel-2 optical + Sentinel-1 radar and an AI analyst
-grounded in verified numbers.
+score** — built on Sentinel-2 optical + Sentinel-1 radar + Sentinel-3
+ocean-colour and an AI analyst grounded in verified numbers.
 
 ## Why SiteWatch AI
 
@@ -18,6 +18,7 @@ accuracy evidence. SiteWatch AI 2.0 solves all three:
 | 🎲 Unvalidated analytics | Error matrix, kappa & per-class accuracy published with every map |
 | 📊 Data ≠ decisions | AI analyst answers in plain language, grounded in verified facts |
 | 🚨 Alert overload | Calibrated 0–1 confidence score + evidence trail on every alert |
+| 🌊 Coastal water blind spots | Sentinel-3 OLCI autoencoder flags unusual biogeochemistry — algal blooms, sediment plumes, red tides |
 
 Full methodology (with literature citations): [`docs/WHITEPAPER.md`](docs/WHITEPAPER.md)
 
@@ -48,6 +49,14 @@ images — **radar independently confirmed the optical signal**, confidence
 and [`docs/LIVE_VERIFICATION.md`](docs/LIVE_VERIFICATION.md), with real scan
 imagery in [`docs/proof/`](docs/proof/).
 
+**New in 2.2 — ocean-colour anomaly detection:** unsupervised monitoring of
+coastal water quality from **Sentinel-3 OLCI**. A Keras autoencoder learns the
+normal water reflectance spectrum and flags departures — algal blooms, sediment
+plumes, turbidity spikes, red tides — as high reconstruction error
+(**ROC-AUC 0.95** on a validated benchmark). Reads Copernicus products with
+Rasterio/Rioxarray or samples via Earth Engine, and ships with an **Ocean AI**
+panel in the app. Full method in [`docs/OCEAN_ANOMALY.md`](docs/OCEAN_ANOMALY.md).
+
 ### See it — real output from the live system
 
 | Optical: true color (Apr → Jul, monsoon) | Radar: same site, cloud-immune |
@@ -65,6 +74,14 @@ imagery in [`docs/proof/`](docs/proof/).
 |---|---|---|
 | ![](docs/proof/confusion_matrix.png) | ![](docs/proof/classification_map.png) | ![](docs/proof/feature_importance.png) |
 
+**Ocean-colour anomaly detection** (Sentinel-3 OLCI autoencoder — blooms &
+sediment plumes surfaced as reconstruction error; full method in
+[`docs/OCEAN_ANOMALY.md`](docs/OCEAN_ANOMALY.md)):
+
+| Detected anomalies | Reconstruction error | Normal vs anomalous spectra |
+|---|---|---|
+| ![](docs/proof/ocean/ocean_overlay.png) | ![](docs/proof/ocean/ocean_error_map.png) | ![](docs/proof/ocean/ocean_spectra.png) |
+
 ![Architecture](docs/proof/architecture_diagram.png)
 
 ## Use it
@@ -75,13 +92,13 @@ from sitewatch_client import SiteWatch
 sw = SiteWatch("https://api.sitewatch.ai", token="YOUR_TOKEN")
 
 result = sw.analyze_change(
-    lat=12.7974, lon=80.2232,
-    before=("2025-01-01", "2025-03-01"),
-    after=("2026-01-01", "2026-03-01"),
+lat=12.7974, lon=80.2232,
+before=("2025-01-01", "2025-03-01"),
+after=("2026-01-01", "2026-03-01"),
 )
-print(result["change_label"])       # e.g. "construction"
-print(result["confidence"])         # e.g. 0.93
-print(result["sar"])                # radar corroboration evidence
+print(result["change_label"]) # e.g. "construction"
+print(result["confidence"]) # e.g. 0.93
+print(result["sar"]) # radar corroboration evidence
 
 # Ask the grounded AI analyst (cites the science books it used):
 answer = sw.ask("Why was this flagged, and how is the confidence computed?")
@@ -100,11 +117,13 @@ insurance & risk · agriculture · government & NGOs — anyone who needs to kno
 
 ```
 Sentinel-2 L2A ─┐
-                ├─► Scientific engine ─► Confidence fusion ─► Alerts + reports
-Sentinel-1 SAR ─┘        │                                       │
-                    harmonic baselines                    AI analyst (LLM,
-                    CVA + adaptive thresholds             grounded in verified
-                    RF land cover + accuracy              numeric facts)
+├─► Scientific engine ─► Confidence fusion ─► Alerts + reports
+Sentinel-1 SAR ─┘ │ │
+harmonic baselines AI analyst (LLM,
+CVA + adaptive thresholds grounded in verified
+RF land cover + accuracy numeric facts)
+
+Sentinel-3 OLCI ──► Ocean-colour autoencoder ─► biogeochemical anomaly maps
 ```
 
 The analytics engine is proprietary. This repository contains the public SDK,
