@@ -51,11 +51,15 @@ imagery in [`docs/proof/`](docs/proof/).
 
 **New in 2.2 — ocean-colour anomaly detection:** unsupervised monitoring of
 coastal water quality from **Sentinel-3 OLCI**. A Keras autoencoder learns the
-normal water reflectance spectrum and flags departures — algal blooms, sediment
-plumes, turbidity spikes, red tides — as high reconstruction error
-(**ROC-AUC 0.95** on a validated benchmark). Reads Copernicus products with
-Rasterio/Rioxarray or samples via Earth Engine, and ships with an **Ocean AI**
-panel in the app. Full method in [`docs/OCEAN_ANOMALY.md`](docs/OCEAN_ANOMALY.md).
+normal water reflectance spectrum and flags departures as high reconstruction
+error (**ROC-AUC 0.95** on a validated benchmark), then goes further — it
+**names and classifies** each event (algal bloom, sediment plume, CDOM/black
+water, turbidity), clusters it in space with a severity and lat/lon, and
+**explains** it via per-band attribution plus an OC4 chlorophyll-a product. A
+run reports, e.g., *"3 events detected: 1 algal bloom, 1 sediment plume,
+1 CDOM/black water."* Reads Copernicus products with Rasterio/Rioxarray or
+samples via Earth Engine, with an **Ocean AI** panel in the app. Full method in
+[`docs/OCEAN_ANOMALY.md`](docs/OCEAN_ANOMALY.md).
 
 ### See it — real output from the live system
 
@@ -78,9 +82,9 @@ panel in the app. Full method in [`docs/OCEAN_ANOMALY.md`](docs/OCEAN_ANOMALY.md
 sediment plumes surfaced as reconstruction error; full method in
 [`docs/OCEAN_ANOMALY.md`](docs/OCEAN_ANOMALY.md)):
 
-| Detected anomalies | Reconstruction error | Normal vs anomalous spectra |
+| Named & classified events | Reconstruction error | Per-band attribution (explainability) |
 |---|---|---|
-| ![](docs/proof/ocean/ocean_overlay.png) | ![](docs/proof/ocean/ocean_error_map.png) | ![](docs/proof/ocean/ocean_spectra.png) |
+| ![](docs/proof/ocean/ocean_event_map.png) | ![](docs/proof/ocean/ocean_error_map.png) | ![](docs/proof/ocean/ocean_attribution.png) |
 
 ![Architecture](docs/proof/architecture_diagram.png)
 
