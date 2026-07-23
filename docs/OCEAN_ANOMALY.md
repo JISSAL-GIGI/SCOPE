@@ -116,6 +116,38 @@ A run reports, e.g., *"3 events detected: 1 algal bloom, 1 sediment plume,
   copernicus --path` at the `.SEN3` folder or a stacked GeoTIFF (read with
   Rasterio/Rioxarray).
 
+## Validated on real ESA data
+
+The physics was benchmarked against ESA's own operational product on a real,
+atmospherically-corrected **Sentinel-3 OLCI Level-2 WFR** scene (Kochi,
+2026-02-27):
+
+- **Physically correct IOPs** — on proper water-leaving reflectance the
+  semi-analytical inversion returns physical values (suspended matter
+  ~0.06 mg/L, particle backscatter ~4×10⁻⁴ m⁻¹), where uncorrected
+  top-of-atmosphere input gives nonsense. Atmospheric correction matters, and
+  the pipeline supports both L2 (rigorous) and Earth Engine L1 (quick-look).
+- **Chlorophyll vs ESA CHL_NN** — after a physically-grounded calibration our
+  chlorophyll centres on ESA's (median 0.325 = 0.325 mg/m³, bias eliminated),
+  positively correlated with the agency product. A bloom scene (wider dynamic
+  range) is the next step to finalise the retrieval slope.
+
+## The SCOPE ocean analyst (RAG-grounded LLM)
+
+Beyond detection, SCOPE **explains** each scene. A local `llama3.1:8b` is given
+the run's *verified numbers* (events, classification, chlorophyll, IOPs,
+attribution, detection metrics) plus retrieved passages from the ocean-science
+reference books, and reasons over them to answer, in plain language:
+
+> why did this happen · natural or human-caused · will it spread · is it
+> dangerous and to which species · what should managers do next
+
+Answers are grounded strictly in the computed facts and cite the books by page
+(e.g. *Lillesand, Kiefer & Chipman p.240*; *Vyas et al. p.156*); a deterministic
+layer is the fact-check/guardrail so the model can never invent a result the
+pipeline didn't produce. Exposed as `POST /api/ocean/ask` and an "Ask the
+analyst" box in the SCOPE UI.
+
 ## Where it lives (engine — private repo)
 
 `backend/ocean_anomaly/` (loaders, preprocessing, Keras autoencoder, scoring,
