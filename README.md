@@ -30,6 +30,16 @@ Full methodology (with literature citations): [`docs/WHITEPAPER.md`](docs/WHITEP
 Click the image (or read the **[User Guide](docs/USER_GUIDE.md)**) for what to type, how to read
 results, geofencing and email alerts — with more screenshots.*
 
+### Explore SCOPE — click any capability
+
+| [**🛰️ Change detection + confidence**](docs/USER_GUIDE.md) | [**☁️ All-weather SAR corroboration**](docs/ALL_WEATHER_MONITORING.md) | [**🗺️ ML land-cover · OA 0.882**](docs/ML_AND_AGENT_v2.md) |
+|:--:|:--:|:--:|
+| [<img src="docs/proof/kochi_ndvi_change_map.png" width="260">](docs/USER_GUIDE.md) | [<img src="docs/proof/kochi_sar_change_map.png" width="260">](docs/ALL_WEATHER_MONITORING.md) | [<img src="docs/proof/classification_map.png" width="260">](docs/ML_AND_AGENT_v2.md) |
+| [**🌊 Ocean-colour anomaly AI**](docs/OCEAN_ANOMALY.md) | [**🧠 Grounded AI analyst**](docs/ML_AND_AGENT_v2.md) | [**✅ Live verification (Kochi)**](docs/LIVE_VERIFICATION.md) |
+| [<img src="docs/proof/ocean/ocean_event_map.png" width="260">](docs/OCEAN_ANOMALY.md) | [<img src="docs/proof/architecture_diagram.png" width="260">](docs/ML_AND_AGENT_v2.md) | [<img src="docs/proof/kochi_rgb_current.png" width="260">](docs/LIVE_VERIFICATION.md) |
+
+*Each tile links to its deep-dive.*
+
 **New here? Start with the [User Guide](docs/USER_GUIDE.md)** — what to type,
 how to read results, geofencing, and email alerts, with real GUI screenshots.
 
