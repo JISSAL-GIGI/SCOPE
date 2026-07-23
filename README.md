@@ -1,15 +1,15 @@
-# SiteWatch AI 🛰️
+# SCOPE 🛰️
 
 **Earth intelligence you can trust.** Satellite change detection and
 environmental monitoring where **every alert carries a statistical confidence
 score** — built on Sentinel-2 optical + Sentinel-1 radar + Sentinel-3
 ocean-colour and an AI analyst grounded in verified numbers.
 
-## Why SiteWatch AI
+## Why SCOPE
 
 Satellite monitoring has a trust problem: seasonal changes trigger false
 alarms, clouds blind optical sensors, and most analytics ship without any
-accuracy evidence. SiteWatch AI 2.0 solves all three:
+accuracy evidence. SCOPE 2.0 solves all three:
 
 | Problem | Our answer |
 |---|---|
@@ -91,9 +91,9 @@ sediment plumes surfaced as reconstruction error; full method in
 ## Use it
 
 ```python
-from sitewatch_client import SiteWatch
+from scope_client import Scope
 
-sw = SiteWatch("https://api.sitewatch.ai", token="YOUR_TOKEN")
+sw = Scope("https://api.scope.ai", token="YOUR_TOKEN")
 
 result = sw.analyze_change(
 lat=12.7974, lon=80.2232,
@@ -109,7 +109,7 @@ answer = sw.ask("Why was this flagged, and how is the confidence computed?")
 print(answer["answer"], answer["citations"])
 ```
 
-SDK: [`sdk/sitewatch_client.py`](sdk/sitewatch_client.py) (MIT licensed).
+SDK: [`sdk/scope_client.py`](sdk/scope_client.py) (MIT licensed).
 
 ## Who it's for
 
@@ -138,4 +138,4 @@ methodology whitepaper, and examples.
 **Jissal Gigi** — jissalgigi@gmail.com · [jissalgigi website](https://jissalgigi.com)
 
 ---
-© 2026 SiteWatch AI. SDK under MIT; platform and engine proprietary.
+© 2026 SCOPE. SDK under MIT; platform and engine proprietary.
